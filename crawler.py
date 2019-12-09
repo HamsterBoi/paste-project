@@ -1,0 +1,2 @@
+class PasteCrawler(object):
+    pass
