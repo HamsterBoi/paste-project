@@ -22,12 +22,16 @@ class Paste(object):
 
     @property
     def title(self):
-        return self._author
+        return self._title
 
     @property
     def content(self):
         return self.content
 
     @property
-    def title(self):
-        return self._author
+    def paste_id(self):
+        return self._paste_id
+
+    @property
+    def date(self):
+        return self._date
