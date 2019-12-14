@@ -3,6 +3,7 @@ import io
 from tinydb import TinyDB, Query
 from dateutil import parser
 from models.paste import Paste
+import os.path
 
 
 class PasteStorage(abc.ABC):
@@ -22,6 +23,10 @@ class PasteStorage(abc.ABC):
 
 class TinyDBPasteStorage(PasteStorage):
     def __init__(self, db_file):
+        if not os.path.isfile(db_file):
+            with io.open(db_file, 'w', encoding="utf-8") as file_handler:
+                file_handler.write("")
+
         self.db = TinyDB(db_file)
 
     def save_paste(self, paste_model: Paste):

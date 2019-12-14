@@ -1,6 +1,5 @@
 from dateutil import parser
 import requests
-import arrow
 from storage_handler import PasteStorage
 import lxml.html
 import abc
