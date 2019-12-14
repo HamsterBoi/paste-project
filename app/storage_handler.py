@@ -2,7 +2,7 @@ import abc
 import io
 from tinydb import TinyDB, Query
 from dateutil import parser
-from models.paste import Paste
+from app.models.paste import Paste
 import os.path
 
 

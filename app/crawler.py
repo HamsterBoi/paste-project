@@ -1,10 +1,10 @@
 from dateutil import parser
 import requests
-from storage_handler import PasteStorage
+from app.storage_handler import PasteStorage
 import lxml.html
 import abc
-from models.paste import Paste
-from constants import PASTE_BIN_BASE_URL, PASTE_BIN_ID_BASE_URL
+from app.models.paste import Paste
+from app.settings import PASTE_BIN_BASE_URL, PASTE_BIN_ID_BASE_URL
 
 
 class Crawler(abc.ABC):
@@ -54,4 +54,5 @@ class PasteCrawler(Crawler):
             self.storage_handler.save_paste(paste_obj)
 
         self.last_date = max_date
-        self.storage_handler.save_last_date(self.last_date)
+        if self.last_date:
+            self.storage_handler.save_last_date(self.last_date)

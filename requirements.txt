@@ -2,4 +2,4 @@ dateutil
 requests
 lxml
 tinydb
-arrow
+python-dotenv
