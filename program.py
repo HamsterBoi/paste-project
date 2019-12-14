@@ -1,8 +1,8 @@
 from time import sleep
 
-from constants import FILES_PATH, LAST_DATE_FILE_NAME, TINY_DB_JSON_FILE
+from constants import TINY_DB_JSON_FILE
 from crawler import PasteCrawler
-from storage_handler import FilePasteStorage, TinyDBPasteStorage
+from storage_handler import TinyDBPasteStorage
 
 
 while True:
