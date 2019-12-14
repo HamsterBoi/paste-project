@@ -2,5 +2,4 @@
 .idea
 venv
 venv/*
-files/*
 db.json
