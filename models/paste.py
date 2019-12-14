@@ -14,7 +14,7 @@ class Paste(object):
             file_handler.write("Author:\n {}\nTitle:\n {}\nContent:\n {}\ndate:\n {}\n".format(self._author,
                                                                                                self._title,
                                                                                                self._content,
-                                                                                               self._date))
+                                                                                               str(self._date)))
 
     @property
     def author(self):
@@ -26,7 +26,7 @@ class Paste(object):
 
     @property
     def content(self):
-        return self.content
+        return self._content
 
     @property
     def paste_id(self):

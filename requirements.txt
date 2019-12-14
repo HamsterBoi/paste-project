@@ -1,3 +1,5 @@
+dateutil
 requests
 lxml
 tinydb
+arrow
