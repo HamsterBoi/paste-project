@@ -2,7 +2,7 @@ import abc
 import io
 from tinydb import TinyDB, Query
 from dateutil import parser
-from app.models.paste import Paste
+from models.paste import Paste
 import os.path
 
 
@@ -45,7 +45,7 @@ class TinyDBPasteStorage(PasteStorage):
 
     def save_last_date(self, date):
         db_query = Query()
-        self.db.upsert({'last_date': str(date)}, db_query.type == "config")
+        self.db.upsert({'last_date': str(date), "type": "config"}, db_query.type == "config")
 
 
 class FilePasteStorage(PasteStorage):

@@ -1,10 +1,10 @@
 from dateutil import parser
 import requests
-from app.storage_handler import PasteStorage
+from storage_handler import PasteStorage
 import lxml.html
 import abc
-from app.models.paste import Paste
-from app.settings import PASTE_BIN_BASE_URL, PASTE_BIN_ID_BASE_URL
+from models.paste import Paste
+from settings import PASTE_BIN_BASE_URL, PASTE_BIN_ID_BASE_URL
 
 
 class Crawler(abc.ABC):
