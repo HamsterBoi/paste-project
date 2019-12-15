@@ -3,6 +3,6 @@
 venv
 venv/*
 db.json
-app/files/*
+files/*
 .env
 python-dotenv
