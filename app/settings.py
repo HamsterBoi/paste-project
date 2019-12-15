@@ -16,6 +16,7 @@ class StorageType(enum.Enum):
 
 
 STORAGE_TYPE = int(os.environ.get("STORAGE_TYPE", StorageType.tinydb.value))
+CRAWLER_SECONDS_DELAY = int(os.environ.get("CRAWLER_SECONDS_DELAY", 120))
 FILES_PATH = os.environ.get("FILES_PATH", "files")
 LAST_DATE_FILE_NAME = os.environ.get("LAST_DATE_FILE_NAME", "last_date")
 PASTE_BIN_ID_BASE_URL = os.environ.get("PASTE_BIN_ID_BASE_URL", "https://pastebin.com")
