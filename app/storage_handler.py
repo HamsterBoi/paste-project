@@ -7,7 +7,6 @@ import os.path
 
 
 class PasteStorage(abc.ABC):
-
     @abc.abstractmethod
     def save_paste(self, paste_model: Paste):
         pass
@@ -24,18 +23,20 @@ class PasteStorage(abc.ABC):
 class TinyDBPasteStorage(PasteStorage):
     def __init__(self, db_file):
         if not os.path.isfile(db_file):
-            with io.open(db_file, 'w', encoding="utf-8") as file_handler:
+            with io.open(db_file, "w", encoding="utf-8") as file_handler:
                 file_handler.write("")
 
         self.db = TinyDB(db_file)
 
     def save_paste(self, paste_model: Paste):
-        self.db.insert({
-            "author": paste_model.author,
-            "title": paste_model.title,
-            "content": paste_model.content,
-            "date": str(paste_model.date)
-        })
+        self.db.insert(
+            {
+                "author": paste_model.author,
+                "title": paste_model.title,
+                "content": paste_model.content,
+                "date": str(paste_model.date),
+            }
+        )
 
     def get_last_date(self):
         db_query = Query()
@@ -45,7 +46,9 @@ class TinyDBPasteStorage(PasteStorage):
 
     def save_last_date(self, date):
         db_query = Query()
-        self.db.upsert({'last_date': str(date), "type": "config"}, db_query.type == "config")
+        self.db.upsert(
+            {"last_date": str(date), "type": "config"}, db_query.type == "config"
+        )
 
 
 class FilePasteStorage(PasteStorage):
@@ -54,20 +57,33 @@ class FilePasteStorage(PasteStorage):
         self._last_date_file_name = last_date_file_name
 
     def save_paste(self, paste_model):
-        with io.open(self._dir_path + r'/{}'.format(paste_model.paste_id), 'w', encoding="utf-8") as file_handler:
-            file_handler.write("Author:\n {}\nTitle:\n {}\nContent:\n {}\ndate:\n {}\n".format(paste_model.author,
-                                                                                               paste_model.title,
-                                                                                               paste_model.content,
-                                                                                               paste_model.date))
+        with io.open(
+            self._dir_path + r"/{}".format(paste_model.paste_id), "w", encoding="utf-8"
+        ) as file_handler:
+            file_handler.write(
+                "Author:\n {}\nTitle:\n {}\nContent:\n {}\ndate:\n {}\n".format(
+                    paste_model.author,
+                    paste_model.title,
+                    paste_model.content,
+                    paste_model.date,
+                )
+            )
 
     def save_last_date(self, date):
-        with io.open("{}/{}".format(self._dir_path, self._last_date_file_name), 'w', encoding="utf-8") as file_handler:
+        with io.open(
+            "{}/{}".format(self._dir_path, self._last_date_file_name),
+            "w",
+            encoding="utf-8",
+        ) as file_handler:
             file_handler.write(str(date))
 
     def get_last_date(self):
         try:
-            with io.open("{}/{}".format(self._dir_path, self._last_date_file_name), 'r',
-                         encoding="utf-8") as file_handler:
+            with io.open(
+                "{}/{}".format(self._dir_path, self._last_date_file_name),
+                "r",
+                encoding="utf-8",
+            ) as file_handler:
                 str_date = file_handler.read()
         except Exception:
             return None

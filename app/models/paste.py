@@ -10,11 +10,14 @@ class Paste(object):
         self._date = date
 
     def save_to_file(self, path):
-        with io.open(path + r'/{}'.format(self._paste_id), 'w', encoding="utf-8") as file_handler:
-            file_handler.write("Author:\n {}\nTitle:\n {}\nContent:\n {}\ndate:\n {}\n".format(self._author,
-                                                                                               self._title,
-                                                                                               self._content,
-                                                                                               str(self._date)))
+        with io.open(
+            path + r"/{}".format(self._paste_id), "w", encoding="utf-8"
+        ) as file_handler:
+            file_handler.write(
+                "Author:\n {}\nTitle:\n {}\nContent:\n {}\ndate:\n {}\n".format(
+                    self._author, self._title, self._content, str(self._date)
+                )
+            )
 
     @property
     def author(self):

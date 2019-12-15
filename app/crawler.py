@@ -30,8 +30,10 @@ class PasteCrawler(Crawler):
 
         for paste_link in paste_links:
             try:
-                paste_href_id = paste_link.attrib.get("href").split('/')[1]
-                html = requests.get(PASTE_BIN_ID_BASE_URL + '/' + paste_href_id, verify=False)
+                paste_href_id = paste_link.attrib.get("href").split("/")[1]
+                html = requests.get(
+                    PASTE_BIN_ID_BASE_URL + "/" + paste_href_id, verify=False
+                )
                 tree = lxml.html.fromstring(html.text)
                 title = tree.xpath('//div[@class="paste_box_info"]//h1')[0].text
                 author = tree.xpath('//div[@class="paste_box_line2"]//a')
@@ -39,14 +41,20 @@ class PasteCrawler(Crawler):
                     author = author[0].text
                 else:
                     author = ""
-                str_date = tree.xpath('//div[@class="paste_box_line2"]//span')[0].attrib.get("title")
+                str_date = tree.xpath('//div[@class="paste_box_line2"]//span')[
+                    0
+                ].attrib.get("title")
                 date = parser.parse(str_date)
-                content = requests.get(PASTE_BIN_BASE_URL + '/raw' + '/' + paste_href_id, verify=False).text
+                content = requests.get(
+                    PASTE_BIN_BASE_URL + "/raw" + "/" + paste_href_id, verify=False
+                ).text
 
                 if not self.last_date or date > self.last_date:
                     if not max_date or date > max_date:
                         max_date = date
-                    pastes_objects.append(Paste(paste_href_id, author, title, content, date))
+                    pastes_objects.append(
+                        Paste(paste_href_id, author, title, content, date)
+                    )
             except Exception:
                 pass
 
