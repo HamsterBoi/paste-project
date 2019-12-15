@@ -9,7 +9,7 @@ python3 program.py
 
 * You can change settings (i.e where to store the data) by modifying settings.py or creating .env file
 
-################################################################################################
+################################################
 
 Run with docker:
 
